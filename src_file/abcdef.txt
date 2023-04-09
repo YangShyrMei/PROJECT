@@ -1,0 +1,12 @@
+class Unzip {
+	    public void unzipfile( String zipFilePath, String destDir ) {  
+	        File dir = new File( destDir ) ;  
+	        // creating an output directory if it doesn't exist already  
+	        if( !dir.exists( ) ) dir.mkdirs( ) ;  
+	        FileInputStream FiS ;  
+	        // buffer to read and write data in the file  
+	        byte[ ] buffer = new byte[ 1024 ] ;  
+	        try {  
+	            FiS = new FileInputStream( zipFilePath ) ;  
+	            ZipInputStream zis = new ZipInputStream( FiS ) ;  
+	            ZipEntry ZE = zis.getNextEntry( ) ;  
