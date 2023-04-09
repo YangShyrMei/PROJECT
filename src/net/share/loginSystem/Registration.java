@@ -68,8 +68,8 @@ public class Registration extends JFrame implements ActionListener {
 		tf6.setBounds(300, 270, 200, 30);
 		tf7.setBounds(300, 310, 200, 30);
 		tf8.setBounds(300,350, 200, 30);
-		btn1.setBounds(50, 350, 100, 30);
-		btn2.setBounds(170, 350, 100, 30);
+		btn1.setBounds(50, 400, 100, 30);
+		btn2.setBounds(170, 400, 100, 30);
 		add(i1);
 		add(i2);
 		add(tf1);
@@ -87,6 +87,8 @@ public class Registration extends JFrame implements ActionListener {
 		add(tf7);
 		add(btn1);
 		add(btn2);
+		add(i9);
+		add(tf8);
 	}
 
 	public void actionPerformed(ActionEvent e) {

@@ -12,6 +12,9 @@ public class SendPublicKey {
 private static DataOutputStream dataOutputStream = null;
     private static DataInputStream dataInputStream = null;
     static String received_public_key_path = System.getProperty("user.dir")+"/receivedPublicKey";
+    public SendPublicKey(){
+
+    }
     public static void sendFile(String path) throws Exception
     {
         int bytes = 0;
@@ -55,7 +58,7 @@ dataOutputStream = new DataOutputStream(s.getOutputStream());
         
 
 }
-public static void main(String args[]) throws Exception {
+/*public static void main(String args[]) throws Exception {
 SendPublicKey s1 = new SendPublicKey();
-}
+}*/
 }
