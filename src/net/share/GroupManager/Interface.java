@@ -1,10 +1,12 @@
-
 package net.share.GroupManager;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 import net.share.loginSystem.getKeys;
 
@@ -14,8 +16,28 @@ import java.io.*;
 public class Interface extends Frame implements ActionListener{
 	
 
-	JButton b1,b2;
+	JButton b1,b2,b3;
 	JFrame frame;
+	String requested_client,IP_address_of;
+	public void receiveClientID() throws Exception
+	{
+		System.out.println("Waiting for request");
+		ServerSocket ss = new ServerSocket(5321);
+		Socket s = ss.accept();
+		System.out.println("Client Connected");
+		InputStream is = s.getInputStream();
+	    InputStreamReader isr = new InputStreamReader(is);
+	    BufferedReader br= new BufferedReader(isr);
+		requested_client=br.readLine();
+		requested_client=requested_client.trim();
+	    System.out.println("Client ID received");
+	       
+	       br.close();
+	       isr.close();
+	       is.close();
+	       s.close();
+	       ss.close();
+	}
 	
 	public Interface()  {
 	
@@ -46,7 +68,7 @@ public class Interface extends Frame implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-                    new SendPublicKey();
+                    new SendPublicKey(IP_address_of, requested_client);
                     dispose();
                 } catch (Exception e1) {
                     // TODO Auto-generated catch block
@@ -69,7 +91,13 @@ public class Interface extends Frame implements ActionListener{
 		{
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new getKeys();
+				try {
+					ReceivePublicKey r = new ReceivePublicKey();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(b1,"Received Public key");
 				dispose();
 	 
 			}
@@ -77,6 +105,52 @@ public class Interface extends Frame implements ActionListener{
 		});
 		
 		container.add(b1);
+		
+		b3 =new JButton("Waiting for Public Key Request");
+		b3.setBounds(350,550,200,40);
+		b3.setFocusable(false);
+		//b5.addActionListener(this);
+		b3.setActionCommand("send");
+		b3.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					System.out.println("Waiting for request");
+					ServerSocket ss = new ServerSocket(5498);
+					Socket s = ss.accept();
+					System.out.println("Client Connected");
+					InputStream is = s.getInputStream();
+				       InputStreamReader isr = new InputStreamReader(is);
+				       
+				       //receive client ID
+				       BufferedReader br= new BufferedReader(isr);
+				       IP_address_of = br.readLine();
+				       IP_address_of=IP_address_of.trim();
+				       br.close();
+				       isr.close();
+				       is.close();
+				       s.close();
+				       ss.close();
+				       receiveClientID();
+				       
+				       
+				       
+				      
+					
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(b3,"Request received so send requested public key");
+				dispose();
+	 
+			}
+			
+		});
+		
+		container.add(b3);
+		
 		
 		frame.setVisible(true);
 		
@@ -104,4 +178,3 @@ public class Interface extends Frame implements ActionListener{
 
 
 }
-

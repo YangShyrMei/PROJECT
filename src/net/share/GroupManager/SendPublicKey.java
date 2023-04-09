@@ -34,20 +34,21 @@ private static DataOutputStream dataOutputStream = null;
         fileInputStream.close();
     }
 
-public SendPublicKey() throws Exception {
-Socket s= new Socket("192.168.43.88",5880);
-BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
+public SendPublicKey(String IP_address_of, String requested_client) throws Exception {
+Socket s= new Socket(IP_address_of,5167);
+/*BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
 String clientID=br.readLine();
 
 //get publicKey using client ID received from sender
 System.out.println(clientID);
 clientID=clientID.trim();
+*/
    
 //send public key of requested ID
 dataInputStream = new DataInputStream(s.getInputStream());
 dataOutputStream = new DataOutputStream(s.getOutputStream());
         System.out.println( "Sending the File to the Server");
-        sendFile(received_public_key_path+"/"+clientID+".txt");
+        sendFile(received_public_key_path+"/"+requested_client+".txt");
         dataInputStream.close();
         dataInputStream.close();
         s.close();
@@ -58,6 +59,3 @@ public static void main(String args[]) throws Exception {
 SendPublicKey s1 = new SendPublicKey();
 }
 }
-
-    
-
