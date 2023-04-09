@@ -5,11 +5,14 @@ import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import java.io.*;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 import net.share.upload.SenderSide;
 import net.share.upload.userSide;
@@ -20,12 +23,16 @@ import net.share.loginSystem.ClientIP;
 
 
 public class getPublicKey extends Frame implements ActionListener{
-	JButton b1,b2;
+	JButton b1,b2,b3;
 	JFrame frame;
-	JTextField t1 = new JTextField();
+	public static JTextField t1 = new JTextField();
 	private static DataInputStream dataInputStream = null;
 	private static DataOutputStream dataOutputStream = null;
 	static String received_public_key_path = System.getProperty("user.dir")+"/receivedPublicKey";
+	static String groupManager="192.168.1.11";
+	//static String ClientID="";
+	public static String clientID="";
+	
 
 	public static void receiveFile(String fileName)throws Exception
         {
@@ -45,6 +52,15 @@ public class getPublicKey extends Frame implements ActionListener{
             // Here we received file
             fileOutputStream.close();
         }
+		public static void sendRequest() throws UnknownHostException, IOException{
+			Socket s = new Socket(groupManager,5321);
+			System.out.println("Sending client ID:");
+            PrintStream ps = new PrintStream(s.getOutputStream());
+            clientID = t1.getText();
+            ps.println(clientID.toCharArray());
+			ps.close();
+			s.close();
+		}
 	
 	public getPublicKey()  {
 
@@ -71,27 +87,62 @@ public class getPublicKey extends Frame implements ActionListener{
 		JLabel label=new JLabel("Enter the Client name :"); 
 		container.add(label);
 		label.setBounds(220,245,150,60); 
+
+
+		//request public key of client from group manager
+		b3 =new JButton("Request Public Key File");
+		b3.setBounds(350,320,200,40);
+		b3.setFocusable(false);
+	
+		b3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					System.out.println("Connecting GM");
+			 		Socket s = new Socket(groupManager, 5498);
+             		//send System IP
+					 System.out.println("Sending System IP");
+					 PrintStream ps = new PrintStream(s.getOutputStream());
+					 InetAddress iAddress= InetAddress.getLocalHost();
+					 String server_IP=iAddress.getHostAddress();
+					 ps.println(server_IP.toCharArray());
+					 ps.close();
+					 s.close();
+					 sendRequest();
+					JOptionPane.showMessageDialog(b3, "Request accepted, get public key");
+
+				}catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+				
+				
+			}
+		});
+		container.add(b3);
+
+
 	
 		
 	
 		//get public key from group manager
 		b1 =new JButton("Get Public Key File");
-		b1.setBounds(350,320,200,40);
+		b1.setBounds(350,420,200,40);
 		b1.setFocusable(false);
 	
 		b1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ServerSocket ss = new ServerSocket(5102);
+					ServerSocket ss = new ServerSocket(5167);
 					System.out.println("Sevrer is waiting for client request");
 					Socket s = ss.accept();
 
 					System.out.println("Client Connected");
 					
-					PrintStream ps = new PrintStream(s.getOutputStream());
+					/*PrintStream ps = new PrintStream(s.getOutputStream());
 					
-					ps.println(t1.getText());
+					ps.println(t1.getText());*/
 
 					dataInputStream = new DataInputStream(s.getInputStream());
 					dataOutputStream = new DataOutputStream(s.getOutputStream());
@@ -101,7 +152,7 @@ public class getPublicKey extends Frame implements ActionListener{
                     //clean up
 					dataInputStream.close();
 					dataOutputStream.close();
-					ps.close();
+					//ps.close();
 					s.close();
 					
 
@@ -118,7 +169,7 @@ public class getPublicKey extends Frame implements ActionListener{
 		frame.setVisible(true);
 		
 		b2 =new JButton("Next");
-		b2.setBounds(350,400,200,40);
+		b2.setBounds(350,500,200,40);
 		b2.setFocusable(false);
 		b2.addActionListener(new ActionListener() {
 			@Override

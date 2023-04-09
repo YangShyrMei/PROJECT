@@ -1,19 +1,25 @@
 package net.share.loginSystem;
 
 import javax.swing.*;
+
+import net.share.GroupManager.IPAddressOfClients;
+import net.share.GroupManager.ImplementationToID;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 import java.util.HashMap;
 
+
 public class Registration extends JFrame implements ActionListener {
-	JLabel i1, i2, i3, i4, i5, i6, i7, i8;
-	JTextField tf1, tf2, tf5, tf6, tf7;
+	JLabel i1, i2, i3, i4, i5, i6, i7, i8, i9;
+	JTextField tf1, tf2, tf5, tf6, tf7, tf8;
 	JButton btn1, btn2;
 	JPasswordField p1, p2;
 	HashMap <String,String> user_details = new HashMap<>();
 	IDandPasswords idp = new IDandPasswords();
-	HashMap <String,String> existing_dir = idp.getLoginInfo();
+	ImplementationToID existing_dir = new ImplementationToID();
+	IPAddressOfClients cip = new IPAddressOfClients();
 
 	Registration() {
 		setVisible(true);
@@ -32,6 +38,7 @@ public class Registration extends JFrame implements ActionListener {
 		i6 = new JLabel("Country:");
 		i7 = new JLabel("state:");
 		i8 = new JLabel("Phone No:");
+		i9 = new JLabel("IP Address");
 		tf1 = new JTextField();
 		tf2 = new JTextField();
 		p1 = new JPasswordField();
@@ -39,6 +46,7 @@ public class Registration extends JFrame implements ActionListener {
 		tf5 = new JTextField();
 		tf6 = new JTextField();
 		tf7 = new JTextField();
+		tf8 = new JTextField();
 		btn1 = new JButton("Submit");
 		btn2 = new JButton("clear");
 		btn1.addActionListener(this);
@@ -51,6 +59,7 @@ public class Registration extends JFrame implements ActionListener {
 		i6.setBounds(80, 230, 200, 30);
 		i7.setBounds(80, 270, 200, 30);
 		i8.setBounds(80, 310, 200, 30);
+		i9.setBounds(80,350,200,30);
 		tf1.setBounds(300, 70, 200, 30);
 		tf2.setBounds(300, 110, 200, 30);
 		p1.setBounds(300, 150, 200, 30);
@@ -58,6 +67,7 @@ public class Registration extends JFrame implements ActionListener {
 		tf5.setBounds(300, 230, 200, 30);
 		tf6.setBounds(300, 270, 200, 30);
 		tf7.setBounds(300, 310, 200, 30);
+		tf8.setBounds(300,350, 200, 30);
 		btn1.setBounds(50, 350, 100, 30);
 		btn2.setBounds(170, 350, 100, 30);
 		add(i1);
@@ -91,7 +101,8 @@ public class Registration extends JFrame implements ActionListener {
 			String s5 = tf5.getText();
 			String s6 = tf6.getText();
 			String s7 = tf7.getText();
-			if(existing_dir.containsKey(s1)){
+			String s10 = tf8.getText();
+			if(existing_dir.isPresent(s1)){
 				JOptionPane.showMessageDialog(btn1,
 								"Please change user name. User name already taken");
 			} else{
@@ -113,7 +124,9 @@ public class Registration extends JFrame implements ActionListener {
 						JOptionPane.showMessageDialog(btn1,
 								"Registration Successfully and your passcode is This is cloud pr");
 						// new Welcome(); */
-						existing_dir.put(s1,s8);
+						existing_dir.addIDPassword(s1,s8);
+						cip.addIPAddress(s1,s10);
+
 						idp.showMap();
 						JOptionPane.showMessageDialog(btn1,
 								"Registration Successful");

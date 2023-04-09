@@ -35,7 +35,7 @@ private static DataOutputStream dataOutputStream = null;
     }
 
 public SendPublicKey() throws Exception {
-Socket s= new Socket("192.168.1.23",5102);
+Socket s= new Socket("192.168.43.88",5880);
 BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
 String clientID=br.readLine();
 

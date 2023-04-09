@@ -33,7 +33,7 @@ public class GenerateKeys{
 		private static DataInputStream dataInputStream = null;
 		static String project_root = System.getProperty("user.dir");
 		static String public_file_path= project_root+"/sendPublicPrivateKey";
-		static String groupManager="192.168.1.31";  //send to GroupManager
+		static String groupManager="192.168.1.11";  //send to GroupManager
 		
 		public void getKeys() throws Exception {
 		 Map<String, Object> keys = getRSAKeys();
@@ -97,11 +97,11 @@ public class GenerateKeys{
         
 		 //send public key to GM ---> GM will send to sender
 	     private static void sendClientID() throws Exception {
-
 			 
-			
+			System.out.println("Connecting GM");
 			 Socket s = new Socket(groupManager, 5110);
              //send client ID
+			 	System.out.println("Sending client ID:");
              PrintStream ps = new PrintStream(s.getOutputStream());
              Login l = new Login();
              String clientID = l.getUserText();

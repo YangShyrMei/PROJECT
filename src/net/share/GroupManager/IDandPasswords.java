@@ -1,4 +1,4 @@
-package net.share.loginSystem;
+package net.share.GroupManager;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -11,15 +11,7 @@ public class IDandPasswords {
 		logininfo.put("meghana","12345");
 		logininfo.put("geetha","12345"); 
 		logininfo.put("dipika","12345");
-		logininfo.put("Yang","12345");
 		}
-	protected HashMap getLoginInfo() {
-		return logininfo;
-	}
-	public void showMap(){
-		for (Entry<String, String> entry : logininfo.entrySet()){
-			System.out.println(entry.getKey()+":"+entry.getValue());
-		}
-	}
+	
 
 }

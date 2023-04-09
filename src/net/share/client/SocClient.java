@@ -34,7 +34,7 @@ public class SocClient {
     }
 
 	public static void main(String[] args) throws Exception {
-		Socket s= new Socket("192.168.56.1",5252);
+		Socket s= new Socket("192.168.43.88",5252); //sender to receiver
 		/* String str="hello Server";
 		
 		OutputStreamWriter os = new OutputStreamWriter(s.getOutputStream());

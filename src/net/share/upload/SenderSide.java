@@ -18,6 +18,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import net.share.client.SocClient;
 import net.share.encryption.SymmetricEncryption;
+import net.share.loginSystem.getPublicKey;
 
 
 public class SenderSide extends Frame implements ActionListener{
@@ -143,7 +144,7 @@ public class SenderSide extends Frame implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 	   try {    
 	        //String host = t1.getText(); 
-	        Socket s= new Socket("192.168.1.31",5130);
+	        Socket s= new Socket(getPublicKey.clientID,5130);
 	        dataInputStream = new DataInputStream(s.getInputStream());
 			dataOutputStream = new DataOutputStream(s.getOutputStream());
 	        System.out.println( "Sending the File to the Server");
