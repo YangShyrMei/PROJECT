@@ -12,7 +12,7 @@ public class ImplementationToID extends IDandPasswords{
     protected HashMap getLoginInfo() {
 		return logininfo;
 	}
-	public void showMap(){
+	public static void showMap(){
 		for (Entry<String, String> entry : logininfo.entrySet()){
 			System.out.println(entry.getKey()+":"+entry.getValue());
 		}
@@ -24,6 +24,9 @@ public class ImplementationToID extends IDandPasswords{
             return true;
         }
         return false;
+    }
+    public static void main(String args[]){
+        showMap();
     }
     
 }

@@ -19,6 +19,8 @@ public class Interface extends Frame implements ActionListener{
 	JButton b1,b2,b3;
 	JFrame frame;
 	String requested_client,IP_address_of;
+	IPAddressOfClients cip = new IPAddressOfClients();
+
 	public void receiveClientID() throws Exception
 	{
 		System.out.println("Waiting for request");
@@ -117,27 +119,38 @@ public class Interface extends Frame implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					System.out.println("Waiting for request");
-					ServerSocket ss = new ServerSocket(5498);
+					ServerSocket ss = new ServerSocket(5513);
 					Socket s = ss.accept();
 					System.out.println("Client Connected");
 					InputStream is = s.getInputStream();
-				       InputStreamReader isr = new InputStreamReader(is);
-				       
-				       //receive client ID
-				       BufferedReader br= new BufferedReader(isr);
-				       IP_address_of = br.readLine();
-				       IP_address_of=IP_address_of.trim();
-				       br.close();
-				       isr.close();
+				    InputStreamReader isr = new InputStreamReader(is);
+					   //receive Client name
+					   BufferedReader br= new BufferedReader(isr);
+				       String client_name = br.readLine();
+					   br.close();
+					   isr.close();
 				       is.close();
 				       s.close();
 				       ss.close();
+
+					    //receive IP Address
+					   System.out.println("Waiting for IP address");
+					   ServerSocket ss1 = new ServerSocket(5498);
+					   Socket s1 = ss1.accept();
+					   InputStream is1 = s1.getInputStream();
+				       InputStreamReader isr1 = new InputStreamReader(is1);
+					   BufferedReader br1= new BufferedReader(isr1);
+					   IP_address_of = br1.readLine();
+					   IP_address_of=IP_address_of.trim();
+					   cip.addIPAddress(client_name,IP_address_of);
+					   br1.close();
+					   isr1.close();
+				       is1.close();
+				       s1.close();
+				       ss1.close();
 				       receiveClientID();
 				       
-				       
-				       
-				      
-					
+	
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

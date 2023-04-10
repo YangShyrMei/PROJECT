@@ -16,6 +16,7 @@ import java.net.UnknownHostException;
 
 import net.share.upload.SenderSide;
 import net.share.upload.userSide;
+import net.share.GroupManager.IPAddressOfClients;
 import net.share.loginSystem.ClientIP;
 
 
@@ -32,6 +33,14 @@ public class getPublicKey extends Frame implements ActionListener{
 	static String groupManager="192.168.1.11";
 	//static String ClientID="";
 	public static String clientID="";
+	String IP_address_of_receiver;
+	IPAddressOfClients cip = new IPAddressOfClients();
+
+	public String getIPAddressOfReceiver()
+	{
+		return IP_address_of_receiver;
+	}
+	
 	
 
 	public static void receiveFile(String fileName)throws Exception
@@ -99,6 +108,17 @@ public class getPublicKey extends Frame implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					System.out.println("Connecting GM");
+					Socket s1 = new Socket(groupManager, 5513);
+					System.out.println("Sending client name");
+					PrintStream ps1 = new PrintStream(s1.getOutputStream());
+					InetAddress iAddress1= InetAddress.getLocalHost();
+					String server_IP1=iAddress1.getHostAddress();
+					ps1.println(server_IP1.toCharArray());
+					ps1.close();
+					s1.close();
+					ps1.close();
+					s1.close();
+					
 			 		Socket s = new Socket(groupManager, 5498);
              		//send System IP
 					 System.out.println("Sending System IP");
@@ -134,6 +154,24 @@ public class getPublicKey extends Frame implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
+					ServerSocket ss1 = new ServerSocket(5183);
+					System.out.println("Sevrer is waiting for client request");
+					Socket s1 = ss1.accept();
+					System.out.println("Client Connected");
+					InputStream is1 = s1.getInputStream();
+					InputStreamReader isr1 = new InputStreamReader(is1);
+					BufferedReader br1= new BufferedReader(isr1);
+					IP_address_of_receiver = br1.readLine();
+					IP_address_of_receiver=IP_address_of_receiver.trim();
+					cip.addIPAddress(clientID,IP_address_of_receiver);
+					br1.close();
+					isr1.close();
+					is1.close();
+					s1.close();
+					ss1.close();
+					System.out.println("Got requested client IP address");
+
+					
 					ServerSocket ss = new ServerSocket(5167);
 					System.out.println("Sevrer is waiting for client request");
 					Socket s = ss.accept();
@@ -154,6 +192,7 @@ public class getPublicKey extends Frame implements ActionListener{
 					dataOutputStream.close();
 					//ps.close();
 					s.close();
+					JOptionPane.showMessageDialog(b1,"Public key received");
 					
 
 				}catch (Exception e1) {

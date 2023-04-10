@@ -1,0 +1,168 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Demo",
+            "request": "launch",
+            "mainClass": "Demo",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "IPAddressOfClients",
+            "request": "launch",
+            "mainClass": "net.share.GroupManager.IPAddressOfClients",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "ImplementationToID",
+            "request": "launch",
+            "mainClass": "net.share.GroupManager.ImplementationToID",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "Interface",
+            "request": "launch",
+            "mainClass": "net.share.GroupManager.Interface",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "ReceivePublicKey",
+            "request": "launch",
+            "mainClass": "net.share.GroupManager.ReceivePublicKey",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "encryptMain",
+            "request": "launch",
+            "mainClass": "net.share.aesAlgorithm.encryptMain",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "SocClient",
+            "request": "launch",
+            "mainClass": "net.share.client.SocClient",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "EncryptionMain",
+            "request": "launch",
+            "mainClass": "net.share.encryption.EncryptionMain",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "Login",
+            "request": "launch",
+            "mainClass": "net.share.loginSystem.Login",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "ReceiverOrSender",
+            "request": "launch",
+            "mainClass": "net.share.loginSystem.ReceiverOrSender",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "Registration",
+            "request": "launch",
+            "mainClass": "net.share.loginSystem.Registration",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "WelcomeScreen",
+            "request": "launch",
+            "mainClass": "net.share.loginSystem.WelcomeScreen",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "getKeys",
+            "request": "launch",
+            "mainClass": "net.share.loginSystem.getKeys",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "getPublicKey",
+            "request": "launch",
+            "mainClass": "net.share.loginSystem.getPublicKey",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "DecryptionButtonMain",
+            "request": "launch",
+            "mainClass": "net.share.mainDecryption.DecryptionButtonMain",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "EncryptionButtonMain",
+            "request": "launch",
+            "mainClass": "net.share.mainEncryption.EncryptionButtonMain",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "CheckRSA",
+            "request": "launch",
+            "mainClass": "net.share.rsaAlgorithm.CheckRSA",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "SoccServer1",
+            "request": "launch",
+            "mainClass": "net.share.server.SoccServer1",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "SampleOneToMany",
+            "request": "launch",
+            "mainClass": "net.share.upload.SampleOneToMany",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "SenderSide",
+            "request": "launch",
+            "mainClass": "net.share.upload.SenderSide",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "sample",
+            "request": "launch",
+            "mainClass": "net.share.upload.sample",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        },
+        {
+            "type": "java",
+            "name": "userSide",
+            "request": "launch",
+            "mainClass": "net.share.upload.userSide",
+            "projectName": "PublicBasedEncryptionFileSharingInClouds"
+        }
+    ]
+}

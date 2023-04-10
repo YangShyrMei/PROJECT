@@ -11,6 +11,8 @@ private static DataOutputStream dataOutputStream = null;
    private static DataInputStream dataInputStream = null;
    public static String clientID;
    static String received_public_key_path = System.getProperty("user.dir")+"/receivedPublicKey";
+   String IP_address_of;
+   IPAddressOfClients cip = new IPAddressOfClients();
    
   
    public static void receiveFile(String clientID,String fileName)throws Exception
@@ -41,7 +43,7 @@ private static DataOutputStream dataOutputStream = null;
 public ReceivePublicKey() throws Exception{
 // establish connection
 System.out.println("Group Manager is waiting for client");
-       ServerSocket ss = new ServerSocket(5110);
+       ServerSocket ss = new ServerSocket(5498);
        
     
        Socket s = ss.accept();
@@ -60,6 +62,22 @@ System.out.println("Group Manager is waiting for client");
        is.close();
        s.close();
        ss.close();
+
+       //receive IP address
+       System.out.println("Waiting for IP address");
+	ServerSocket ss1 = new ServerSocket(5498);
+	Socket s1 = ss1.accept();
+	InputStream is1 = s1.getInputStream();
+	InputStreamReader isr1 = new InputStreamReader(is1);
+	BufferedReader br1= new BufferedReader(isr1);
+	IP_address_of = br1.readLine();
+	IP_address_of=IP_address_of.trim();
+	cip.addIPAddress(clientID,IP_address_of);
+	br1.close();
+	isr1.close();
+	is1.close();
+	s1.close();
+	ss1.close();
        getFile();
 }
 

@@ -19,7 +19,7 @@ public class Registration extends JFrame implements ActionListener {
 	HashMap <String,String> user_details = new HashMap<>();
 	IDandPasswords idp = new IDandPasswords();
 	ImplementationToID existing_dir = new ImplementationToID();
-	IPAddressOfClients cip = new IPAddressOfClients();
+	
 
 	Registration() {
 		setVisible(true);
@@ -127,7 +127,7 @@ public class Registration extends JFrame implements ActionListener {
 								"Registration Successfully and your passcode is This is cloud pr");
 						// new Welcome(); */
 						existing_dir.addIDPassword(s1,s8);
-						cip.addIPAddress(s1,s10);
+						
 
 						idp.showMap();
 						JOptionPane.showMessageDialog(btn1,

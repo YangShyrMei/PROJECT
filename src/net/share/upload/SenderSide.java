@@ -25,6 +25,7 @@ public class SenderSide extends Frame implements ActionListener{
 	
 	private static DataOutputStream dataOutputStream = null;
     private static DataInputStream dataInputStream = null;
+	public static JTextField t2 = new JTextField();
 	JButton b1,b2,b3,b4,b5,b6,add;
 	JFrame frame;
 	JTextField t1 = new JTextField();
@@ -85,6 +86,12 @@ public class SenderSide extends Frame implements ActionListener{
 		//label2.setForeground(new Color("0x00FF00"));
 		//label2.printBorder(true);
 		label2.setBackground(Color.black);
+
+		JLabel label=new JLabel("Enter the Client name :"); 
+		container.add(label);
+		label.setBounds(220,100,150,60); 
+		t1.setBounds(380,100,200,40);
+		container.add(t1);
 		
 		b1 =new JButton("Upload your File");
 		b1.setBounds(350,200,200,40);
@@ -143,8 +150,8 @@ public class SenderSide extends Frame implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 	   try {    
-	        //String host = t1.getText(); 
-	        Socket s= new Socket(getPublicKey.clientID,5130);
+	        getPublicKey g1 = new getPublicKey();
+	        Socket s= new Socket(g1.getIPAddressOfReceiver(),5518);
 	        dataInputStream = new DataInputStream(s.getInputStream());
 			dataOutputStream = new DataOutputStream(s.getOutputStream());
 	        System.out.println( "Sending the File to the Server");
